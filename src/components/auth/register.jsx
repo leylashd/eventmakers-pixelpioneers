@@ -1,13 +1,34 @@
-import React from "react";
+"use client";
+
+import { useState } from "react";
 
 export const Register = () => {
+  const [message, setMessage] = useState("");
+
+  async function handleRegister(formData) {
+    const name = formData.get("name");
+    const email = formData.get("email");
+    const password = formData.get("password");
+
+    const res = await fetch("https://eventmakers.devscale.id/auth/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ name, email, password }),
+    });
+
+    const jsonRes = await res.json();
+    setMessage(jsonRes.message);
+  }
+
   return (
-    <main>
+    <main className="space-y-4">
       <section>
         <h1>Register</h1>
         <p>Please register to login</p>
       </section>
-      <form>
+      <form className="space-y-2" action={handleRegister}>
         <label class="input input-bordered flex items-center gap-2">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -17,7 +38,13 @@ export const Register = () => {
           >
             <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM12.735 14c.618 0 1.093-.561.872-1.139a6.002 6.002 0 0 0-11.215 0c-.22.578.254 1.139.872 1.139h9.47Z" />
           </svg>
-          <input name="name" type="text" class="grow" placeholder="Username" />
+          <input
+            name="name"
+            type="text"
+            class="grow"
+            placeholder="Username"
+            className="my-4"
+          />
         </label>
         <label class="input input-bordered flex items-center gap-2">
           <svg
@@ -53,6 +80,7 @@ export const Register = () => {
         </label>
         <button className="btn btn-neutral">Sign up</button>
       </form>
+      {message !== "" ? <div>{message}</div> : null}
     </main>
   );
 };

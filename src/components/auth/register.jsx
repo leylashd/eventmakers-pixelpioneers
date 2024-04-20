@@ -24,8 +24,8 @@ export const Register = () => {
 
   return (
     <main className="space-y-4">
-      <section>
-        <h1>Register</h1>
+      <section className="space-y-3">
+        <h1 className="text-2xl font-bold">Register</h1>
         <p>Please register to login</p>
       </section>
       <form className="space-y-2" action={handleRegister}>
@@ -78,7 +78,7 @@ export const Register = () => {
             placeholder="Password"
           />
         </label>
-        <button className="btn btn-neutral">Sign up</button>
+        <button className="btn btn-neutral w-full">Sign up</button>
       </form>
       {message !== "" ? <div>{message}</div> : null}
     </main>

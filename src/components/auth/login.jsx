@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import Cookies from "js-cookie";
 
 export const Login = () => {
   const router = useRouter();
@@ -23,6 +24,11 @@ export const Login = () => {
       const jsonRes = await res.json();
       setMessage(jsonRes.message);
       router.push("/dashboard");
+
+      const { payload, token } = jsonRes;
+
+      localStorage.setItem("userdata", JSON.stringify(payload));
+      Cookies.set("token", JSON.stringify(token));
     }
 
     if (res.status === 401 || res.status === 404) {

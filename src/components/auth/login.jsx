@@ -1,13 +1,43 @@
-import React from "react";
+"use client";
+
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export const Login = () => {
+  const router = useRouter();
+  const [message, setMessage] = useState("");
+
+  async function handleLogin(formData) {
+    const email = formData.get("email");
+    const password = formData.get("password");
+
+    const res = await fetch("https://eventmakers.devscale.id/auth/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email, password }),
+    });
+
+    if (res.status === 200) {
+      const jsonRes = await res.json();
+      setMessage(jsonRes.message);
+      router.push("/dashboard");
+    }
+
+    if (res.status === 401 || res.status === 404) {
+      const jsonRes = await res.json();
+      setMessage(jsonRes.message);
+    }
+  }
+
   return (
     <main className="space-y-4">
       <section className="space-y-3">
         <h1 className="text-2xl font-bold">Login</h1>
         <p>Please Sign in to continue</p>
       </section>
-      <form className="space-y-2">
+      <form className="space-y-2" action={handleLogin}>
         <label class="input input-bordered flex items-center gap-2">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -42,6 +72,7 @@ export const Login = () => {
         </label>
         <button className="btn btn-neutral w-full">Sign in</button>
       </form>
+      {message !== "" ? <div>{message}</div> : null}
     </main>
   );
 };

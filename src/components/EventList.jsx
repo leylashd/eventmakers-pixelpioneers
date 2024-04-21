@@ -2,9 +2,9 @@
 
 import React from "react";
 
-export const EventList = ({title, image, datetime, author}) => {
+export const EventList = ({title, image, datetime, author, participant}) => {
   return (
-    <div className="card w-96 shadow-xl my-5 bg-slate-50 truncate">
+    <div className="card w-96 shadow-xl my-5 bg-slate-50  top-0">
       <figure >
         <img className="object-cover h-96 w-full" src={image} alt="Shoes" />
       </figure>

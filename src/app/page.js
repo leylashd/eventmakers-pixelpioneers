@@ -1,5 +1,11 @@
-import Image from "next/image";
+import React from 'react'
+import { Hero } from '@/components/landing-page/hero'
+import { Navbar } from '@/components/landing-page/navbar'
 
-export default function Home() {
-  return <h1>Ini adalah staging</h1>;
+export default function page() {
+  return (
+    <div>
+      <Hero heading="🎉 Event Makers"/>
+    </div>
+  )
 }

@@ -1,13 +1,34 @@
 "use client";
 
+import { useState } from "react";
+
 export const Register = () => {
+  const [message, setMessage] = useState("");
+
+  async function handleRegister(formData) {
+    const name = formData.get("name");
+    const email = formData.get("email");
+    const password = formData.get("password");
+
+    const res = await fetch("https://eventmakers.devscale.id/auth/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ name, email, password }),
+    });
+
+    const jsonRes = await res.json();
+    setMessage(jsonRes.message);
+  }
+
   return (
     <main className="space-y-4">
       <section className="space-y-3">
         <h1 className="text-2xl font-bold">Register</h1>
         <p>Please register to login</p>
       </section>
-      <form className="space-y-2">
+      <form className="space-y-2" action={handleRegister}>
         <label class="input input-bordered flex items-center gap-2">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -59,6 +80,7 @@ export const Register = () => {
         </label>
         <button className="btn btn-neutral w-full">Sign up</button>
       </form>
+      {message !== "" ? <div>{message}</div> : null}
     </main>
   );
 };

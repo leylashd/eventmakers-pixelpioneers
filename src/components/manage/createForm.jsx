@@ -59,7 +59,7 @@ export const CreateForm = () => {
           </button>
         </form>
         <div className='text-2xl font-semibold mt-6 text-left'>
-            <EventTable/>
+            {/* <EventTable/> */}
         </div>
       </div>
     </div>

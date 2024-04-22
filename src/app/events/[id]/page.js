@@ -1,4 +1,5 @@
-import { CreateForm } from "@/components/CreateForm";
+
+import { JoinEvent } from "@/components/JoinEvent";
 
 import { Navbar } from "@/components/Navbar";
 
@@ -9,10 +10,7 @@ async function getEvent(id) {
     return data;
 }
 
-
-
 export default async function Page({ params }) {
-
     const { id } = params;
     const event = await getEvent(id);
     return (
@@ -35,7 +33,7 @@ export default async function Page({ params }) {
                             <p className="font-bold mt-2">Author :</p>
                             <p> {event.events.author}</p>
                             <p className="font-bold mt-2">Join Now</p>
-                            <CreateForm />
+                            <JoinEvent eventid={event.events.id} />
                         </div>
                     </div>
                 </div>

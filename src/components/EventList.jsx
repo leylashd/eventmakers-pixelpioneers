@@ -3,6 +3,7 @@
 import React from "react";
 
 export const EventList = ({title, image, datetime, author}) => { 
+ 
   return (
     <div className="card w-96 shadow-xl my-5 bg-slate-50  top-0">
       <figure >

@@ -2,6 +2,7 @@
 import { JoinEvent } from "@/components/JoinEvent";
 
 import { Navbar } from "@/components/Navbar";
+import Image from "next/image";
 
 async function getEvent(id) {
     const res = await fetch(`https://eventmakers.devscale.id/events/${id}`);
@@ -20,7 +21,7 @@ export default async function Page({ params }) {
                 <div className="card  font-bold w-96 shadow-xl p-5 my-4 bg-slate-300">
                     <h1>{event.events.title}</h1>
                 </div>
-                <img className="w-full pt-3" src={event.events.image} />
+                <Image className="w-full pt-3" src={event.events.image} alt="no Image" />
                 <div className="flex justify-between">
                     <div>
                         <h1 className="text-xl font-bold mt-4">Details</h1>
